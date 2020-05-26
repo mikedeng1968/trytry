@@ -1,4 +1,29 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC #  NN (tensorflow) model for forecasting new vehicle prices
+# MAGIC ## run weekday to catch any transdata updates and any new vehicle entries
+# MAGIC ## Forecasting price of each run can be used for daily/weekly/monthly
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
+# MAGIC * traindata: summarized transaction data by style, salemonth whenever data being updated
+# MAGIC * forecasting data: Edmunds new vehicles listed
+# MAGIC * create age for all foecasted vehicles (age:from 1-36 month), the brand new vehicle's age will be automatically adjusted based on actual sales data later on
+# MAGIC * All features of the forecasting data derived from prior month/two month/three month, and some from couple of years data based on sales counts and time,age,style,model,category,make
+# MAGIC * If no features can be assiged, for example, in May, 2020,only few sales for 2018 models, so most 2018 model price borrowed from long term forecasting or unnecessary forecasting with assigned  depreciation rate for 2018 models forcasted by the end of 2019
+# MAGIC * exotic vehicles (category='R') wont be forecasted, all prices =msrp
+# MAGIC * The forcasted price will be converted margin (forecasted price/msrp_applied), hoever, dealer cash impact will be adjusted if the dealer cash is so different from NN model used
+# MAGIC * NN model mainly to catch seasonal /monthly impact on model/category/make level
+# MAGIC * the NN modeing (with L2 elastic net function imbeded) is fully automated,powerful, and self optimized  process as time by for forecasting month with daily run
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 import pathlib
 import matplotlib.pyplot as plt
