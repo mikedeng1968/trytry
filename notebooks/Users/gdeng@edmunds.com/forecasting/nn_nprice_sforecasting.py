@@ -234,7 +234,7 @@ def toProcessTestData():
   #df1=toProcessTransData()
   #testdatap=toProcessTestData()
 def depnum(mm):
-  return(F.when(mm==12,-0.006).when(mm==1,0.002).otherwise(-0.0005))
+  return(F.when(mm==12,-0.001).when(mm==1,0.0005).otherwise(0.0))
 def toSummaryData():
   dsummary1=testdatap.groupBy('ed_model_id') \
          .agg(F.round(F.sum(F.col('ptgf')*F.col('trans_count'))/F.sum(F.col('trans_count')),4).alias('ptgmean') , \
@@ -537,7 +537,7 @@ def toappendfinaltable():
 
 # COMMAND ----------
 
-dbutils.widgets.removeAll()
+#dbutils.widgets.removeAll()
 
 # COMMAND ----------
 
